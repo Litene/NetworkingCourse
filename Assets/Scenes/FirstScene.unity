@@ -131,6 +131,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1567886513182069720, guid: 418de5633e7bd8e428f8e3b357c99115, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 8602285102701816178, guid: f71fb8ffd751220428fef9c02f7c6dd0, type: 3}
+    - target: {fileID: 1567886513182069720, guid: 418de5633e7bd8e428f8e3b357c99115, type: 3}
+      propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3972c245c3504a045b816827167a8f7c, type: 2}
     - target: {fileID: 6563631043314393938, guid: 418de5633e7bd8e428f8e3b357c99115, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.42196858

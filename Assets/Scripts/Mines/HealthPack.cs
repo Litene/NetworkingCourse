@@ -1,26 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
+﻿using Unity.Netcode;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
+public class HealthPack : Pickup {
+    public override void OnNetworkSpawn() => OnTriggerAction += HealPlayer;
 
-// this should be refactored... its the same behavior.. 
-public class StandardMine : Pickup {
-    public override void OnNetworkSpawn() => OnTriggerAction += DamagePlayer;
-    [SerializeField] private int _damage = 25;
     void OnTriggerEnter2D(Collider2D other) {
         if (!IsServer) return;
 
         OnTriggerAction?.Invoke(other);
     }
 
-    private void DamagePlayer(Collider2D other) {
+    private void HealPlayer(Collider2D other) {
         Health health = other.GetComponentInParent<Health>();
         if (!health) return;
-        
-        var tempDamage = _damage;
-        health.TakeDamage(ref tempDamage);
+        health.Heal(25);
 
         int xPosition = Random.Range(-4, 4);
         int yPosition = Random.Range(-2, 2);

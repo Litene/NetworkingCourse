@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class FiringAction : NetworkBehaviour
     private void ShootBulletServerRpc()
     {
         GameObject bullet = Instantiate(serverSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), playerController._bodyRb.GetComponent<Collider2D>());
         ShootBulletClientRpc();
     }
 
@@ -39,14 +40,14 @@ public class FiringAction : NetworkBehaviour
     {
         if (IsOwner) return;
         GameObject bullet = Instantiate(clientSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), playerController._bodyRb.GetComponent<Collider2D>());
 
     }
 
     private void ShootLocalBullet()
     {
         GameObject bullet = Instantiate(clientSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), playerController._bodyRb.GetComponent<Collider2D>());
 
         ShootBulletServerRpc();
     }
